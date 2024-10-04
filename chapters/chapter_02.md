@@ -72,6 +72,16 @@ você. É exatamente assim que o *Copy-On-Write* funciona.
 Basicamente, significa que um novo recurso, seja ele um bloco no disco
 ou uma área em memória, só é alocado quando for modificado.
 
+Além disso, é importante entender que, ao usar o Copy-On-Write, o arquivo
+original não é duplicado inteiramente quando ocorre uma modificação. 
+Em vez disso, apenas o diferencial, ou seja, as mudanças específicas 
+feitas em relação à versão original, é armazenado na nova camada. 
+Isso significa que, em termos de uso de espaço, apenas as diferenças 
+são registradas, garantindo um armazenamento mais eficiente e evitando 
+a duplicação desnecessária de dados. Dessa forma, as camadas são 
+compostas de apenas aquilo que mudou, o que permite uma utilização 
+otimizada dos recursos.
+
 Tá, mas o que isso tudo tem a ver com o Docker? Bom, como você sabe, o
 Docker usa um esquema de camadas, ou *layers*, e para montar essas
 camadas são usadas técnicas de *Copy-On-Write*. Um *container* é
